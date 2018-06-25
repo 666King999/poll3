@@ -1,0 +1,13 @@
+server: 
+    port: 8080
+    session-timeout: 60
+
+    
+spring: 
+    datasource: 
+        name: poll
+        url: jdbc:mysql://localhost:3306/poll2.0?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 123456  
+
+
