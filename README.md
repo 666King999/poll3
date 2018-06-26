@@ -2,8 +2,12 @@
 
 ## 开发说明
 
+
+Springboot 版本2.0.2
+
 数据库相关配置 在application-dev.yml文件内
 sql文件在resource文件下
+
 
 
 以后resource文件夹下的文件不要提交了
