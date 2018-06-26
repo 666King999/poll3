@@ -66,10 +66,20 @@ public interface IClazzService {
 	 */
 	public void batchDelete(List<Long> ids) throws Exception;
 	
+
 	/**
 	 * @Title: selectAll
 	 * @Description: TODO 查询所有班级并携 相应的 年级与 班主任老师
 	 * @return
+	 * @throws Exception
 	 */
 	public List<ClazzVM> selectAll() throws Exception;
+	
+	/**
+	 * @Title: selectById
+	 * @Description: TODO 根据id查询相应的班级及其年级与 班主任老师
+	 * @param id
+	 * @return
+	 */
+	public ClazzVM selectById(long id);
 }

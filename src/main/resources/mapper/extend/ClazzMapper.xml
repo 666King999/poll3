@@ -13,4 +13,8 @@
   <select id="selectAll" resultMap="clazzVMResultMap">
   	select * from poll_clazz;
   </select>
+  
+   <select id="selectById" parameterType="java.lang.Long" resultMap="clazzVMResultMap">
+  	select * from poll_clazz where id=#{id};
+  </select>
 </mapper>

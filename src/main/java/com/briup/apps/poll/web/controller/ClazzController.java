@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -112,6 +113,20 @@ public class ClazzController {
 		try {
 			List<ClazzVM> list = clazzService.selectAll();
 			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}	
+
+	}
+	
+	@ApiOperation(value="根据id查找班级",notes="查询班级信息以及对应的年级与老师")
+	@GetMapping("selectById")
+	public MsgResponse selectById(long id){
+		try {
+			ClazzVM clazzVM = clazzService.selectById(id);
+			return MsgResponse.success("success", clazzVM);
 		} catch (Exception e) {
 			//TODO Auto-generated catch block
 			e.printStackTrace();

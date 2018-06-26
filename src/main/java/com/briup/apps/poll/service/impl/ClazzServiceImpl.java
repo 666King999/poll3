@@ -74,4 +74,10 @@ public class ClazzServiceImpl implements IClazzService{
 		return clazzVMMapper.selectAll();
 	}
 
+	@Override
+	public ClazzVM selectById(long id) {
+		// TODO Auto-generated method stub
+		return clazzVMMapper.selectById(id);
+	}
+
 }
