@@ -33,17 +33,18 @@
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>  
 	<!--     逆向生成具体配置  -->
-    <table tableName="poll_user" domainObjectName="User"></table>
+<!--     <table tableName="poll_user" domainObjectName="User"></table>
     <table tableName="poll_survey" domainObjectName="Survey"></table>
-    <table tableName="poll_school" domainObjectName="School"></table>
-    <table tableName="poll_answer" domainObjectName="Answer"></table>
-    <table tableName="poll_question" domainObjectName="Question"></table>
+    <table tableName="poll_school" domainObjectName="School"></table> -->
+    <table tableName="poll_answers" domainObjectName="Answer"></table>
+    <table tableName="poll_options" domainObjectName="Option"></table>
+<!--     <table tableName="poll_question" domainObjectName="Question"></table>
     <table tableName="poll_questionnaire" domainObjectName="Questionnaire"></table>
     <table tableName="poll_qq" domainObjectName="QQ"></table>
-    <table tableName="poll_option" domainObjectName="Option"></table>
+    
     <table tableName="poll_grade" domainObjectName="Grade"></table>
     <table tableName="poll_course" domainObjectName="Course"></table> 
-    <table tableName="poll_clazz" domainObjectName="Clazz"></table>
+    <table tableName="poll_clazz" domainObjectName="Clazz"></table> -->
     
   </context>
 </generatorConfiguration>
