@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -16,7 +16,7 @@
 	  <setting name="defaultStatementTimeout" value="25"/>
 	  <setting name="defaultFetchSize" value="100"/>
 	  <setting name="safeRowBoundsEnabled" value="false"/>
-	  <!-- 是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。 -->
+	  是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。
 	  <setting name="mapUnderscoreToCamelCase" value="false"/>
 	  <setting name="localCacheScope" value="SESSION"/>
 	  <setting name="jdbcTypeForNull" value="OTHER"/>
@@ -28,4 +28,4 @@
 	  <package name="cn.yechangqing.cqzone.bean"/>
 	</typeAliases>
 	
-</configuration>
+</configuration> -->

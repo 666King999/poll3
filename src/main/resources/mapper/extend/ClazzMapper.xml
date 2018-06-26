@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.ClazzVMMapper">
+  <resultMap id="clazzVMResultMap" type="com.briup.apps.poll.bean.extend.ClazzVM">
+  	<id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+ 	<association column="grade_id" property="grade" select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"></association>
+    <association column="charge_id" property="charge" select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  
+  
+  <select id="selectAll" resultMap="clazzVMResultMap">
+  	select * from poll_clazz;
+  </select>
+</mapper>

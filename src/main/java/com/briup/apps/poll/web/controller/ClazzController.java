@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Clazz;
+import com.briup.apps.poll.bean.extend.ClazzVM;
 import com.briup.apps.poll.service.IClazzService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -23,8 +24,8 @@ public class ClazzController {
 	IClazzService clazzService;
 	
 	@ApiOperation("查询所有班级")
-	@GetMapping("/findAllClazz")
-	public MsgResponse findAllClazzs(){
+	@GetMapping("findAllClazz")
+	public MsgResponse findAllClazz(){
 		try {
 			List<Clazz> list = clazzService.findAll();
 			return MsgResponse.success("success", list);
@@ -37,7 +38,7 @@ public class ClazzController {
 	}
 
 	@ApiOperation("通过id查找班级信息")
-	@GetMapping("/finById")
+	@GetMapping("finById")
 	public MsgResponse findById(long id) {
 		try {
 			Clazz course = clazzService.findById(id);
@@ -49,7 +50,7 @@ public class ClazzController {
 	}
 	
 	@ApiOperation("添加或更新")
-	@PostMapping("/add")
+	@PostMapping("add")
 	public MsgResponse saveOrUpdate(Clazz course) {
 		try {
 			clazzService.saveOrUpdate(course);
@@ -75,7 +76,7 @@ public class ClazzController {
 	}
 	
 	@ApiOperation("根据id删除班级信息")
-	@GetMapping("/delete")
+	@GetMapping("delete")
 	public MsgResponse deletById(long id) {
 		try {
 			clazzService.deleteById(id);
@@ -88,6 +89,7 @@ public class ClazzController {
 	}
 	
 	@ApiOperation("根据idList 批量删除班级信息")
+	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(String ids) {
 		try {
 			String[] idArray = ids.split("-");
@@ -102,5 +104,19 @@ public class ClazzController {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
+	}
+	
+	@ApiOperation(value="查询所有班级",notes="查询班级信息以及对应的年级与老师")
+	@GetMapping("selectAllClazz")
+	public MsgResponse selectAllClazz(){
+		try {
+			List<ClazzVM> list = clazzService.selectAll();
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}	
+
 	}
 }

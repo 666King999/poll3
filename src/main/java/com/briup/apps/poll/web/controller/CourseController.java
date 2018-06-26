@@ -27,8 +27,8 @@ public class CourseController {
 	private ICourseService courseService;
 	
 	@ApiOperation("查询所有课程")
-	@GetMapping("/findAllCourse")
-	public MsgResponse findAllCourses(){
+	@GetMapping("findAllCourse")
+	public MsgResponse findAllCourse(){
 		try {
 			List<Course> list = courseService.findAll();
 			return MsgResponse.success("success", list);
@@ -41,7 +41,7 @@ public class CourseController {
 	}
 
 	@ApiOperation("通过id查找课程信息")
-	@GetMapping("/finById")
+	@GetMapping("finById")
 	public MsgResponse findById(long id) {
 		try {
 			Course course = courseService.findById(id);
@@ -53,7 +53,7 @@ public class CourseController {
 	}
 	
 	@ApiOperation("添加或更新")
-	@PostMapping("/add")
+	@PostMapping("add")
 	public MsgResponse saveOrUpdate(Course course) {
 		try {
 			courseService.saveOrUpdate(course);
@@ -66,7 +66,7 @@ public class CourseController {
 	}
 	
 	@ApiOperation("模糊查询")
-	@GetMapping("/query")
+	@GetMapping("query")
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Course> list = courseService.query(keyWord);
@@ -79,7 +79,7 @@ public class CourseController {
 	}
 	
 	@ApiOperation("根据id删除课程信息")
-	@GetMapping("/delete")
+	@GetMapping("delete")
 	public MsgResponse deletById(long id) {
 		try {
 			courseService.deleteById(id);
@@ -92,7 +92,7 @@ public class CourseController {
 	}
 	
 	@ApiOperation("根据idList 批量删除课程信息")
-	@GetMapping("/batchDelete")
+	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(String ids) {
 		try {
 			String[] idArray = ids.split("-");

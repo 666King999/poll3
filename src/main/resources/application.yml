@@ -16,7 +16,7 @@ spring:
 
 mybatis: 
     config-locations: classpath:mybatis-config.xml
-    mapper-locations: classpath:mapper/*.xml  
+    mapper-locations: classpath:mapper/**/*.xml  
 
 # 热部署开关，false即不启用热部署
 spring.devtools.restart.enabled: true
