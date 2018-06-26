@@ -5,8 +5,11 @@
 数据库相关配置 在application-dev.yml文件内
 sql文件在resource文件下
 
+
 以后resource文件夹下的文件不要提交了
 
+
+数据库中所有的表的复数形式映射到bean时都没有s  例如  数据库表中是  options  对应的bean  Option     answers 对应的bean Answer
 
 java文件
 
