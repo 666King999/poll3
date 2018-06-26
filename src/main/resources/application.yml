@@ -2,16 +2,16 @@
 spring:
     profiles: 
         active: dev
-########## 静态资源访问配置 ###########
-    mvc: 
-        static-path-pattern: /**
-    resources:
-        static-locations: classpath:/static/
-    
-###########  MVC视图解析配置  ###########
-spring.mvc.view.prefix: classpath:/templates/
-spring.mvc.view.suffix: .html
-spring.mvc.date-format: yyyy-MM-dd
+########### 静态资源访问配置 ###########
+#    mvc: 
+#        static-path-pattern: /**
+#    resources:
+#        static-locations: classpath:/static/
+#    
+############  MVC视图解析配置  ###########
+#spring.mvc.view.prefix: classpath:/templates/
+#spring.mvc.view.suffix: .html
+#spring.mvc.date-format: yyyy-MM-dd
 
 
 mybatis: 
