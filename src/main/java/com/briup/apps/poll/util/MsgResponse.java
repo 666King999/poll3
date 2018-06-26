@@ -5,6 +5,7 @@ public class MsgResponse {
 	private String message;	//错误、成功信息
 	private Object data;	//数据	500 null
 	
+	
 	public static MsgResponse success(String message, Object data){
 		MsgResponse response = new MsgResponse();
 		response.setStauts(200);
