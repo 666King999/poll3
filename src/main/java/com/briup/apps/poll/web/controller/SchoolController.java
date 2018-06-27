@@ -90,7 +90,7 @@ public class SchoolController {
 		}
 	}
 	@GetMapping("batchDeleteSchool")
-	public MsgResponse batchDelete(List<Long> ids) {
+	public MsgResponse batchDelete(Long[] ids) {
 		try {
 			schoolService.batchDelete(ids);
 			//返回成功信息

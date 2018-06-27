@@ -49,7 +49,7 @@ public class SchoolServiceImpl implements ISchoolService{
 	}
 
 	@Override
-	public void batchDelete(List<Long> ids) throws Exception {
+	public void batchDelete(Long[] ids) throws Exception {
 		for(long id : ids){
 			schoolMapper.deleteByPrimaryKey(id);
 		}

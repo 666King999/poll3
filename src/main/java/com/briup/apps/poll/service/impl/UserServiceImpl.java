@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public void batchDelete(List<Long> ids) throws Exception {
+	public void batchDelete(Long[] ids) throws Exception {
 		for(long id : ids){
 			userMapper.deleteByPrimaryKey(id);
 		}

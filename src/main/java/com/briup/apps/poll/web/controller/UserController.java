@@ -90,7 +90,7 @@ public class UserController {
 		}
 	}
 	@GetMapping("batchDeleteUser")
-	public MsgResponse batchDelete(List<Long> ids) {
+	public MsgResponse batchDelete(Long[] ids) {
 		try {
 			userService.batchDelete(ids);
 			//返回成功信息
