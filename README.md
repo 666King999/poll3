@@ -24,7 +24,7 @@
 - JDK1.8
 - mysql5.5
 
-SpringBoot文档：[https://spring.io/projects/spring-boot(https://spring.io/projects/spring-boot)
+SpringBoot文档：[https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
 
 ## 留言&&交流
 
