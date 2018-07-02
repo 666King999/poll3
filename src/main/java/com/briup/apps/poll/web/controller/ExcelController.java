@@ -1,8 +1,10 @@
 package com.briup.apps.poll.web.controller;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -10,12 +12,18 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.briup.apps.poll.bean.Answer;
 import com.briup.apps.poll.service.IAnswerService;
+import com.briup.apps.poll.util.MsgResponse;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -102,4 +110,40 @@ public class ExcelController extends BaseController{
 		cell.setCellValue("简答");
 		cell.setCellStyle(style);
 	}
+	
+	@ApiOperation("上传Excel表格")
+	@PostMapping("upload")
+	public MsgResponse upload(MultipartFile file) {
+		if (file==null) {
+			return error("file不能为空");
+		}
+		List<Answer> answers = new ArrayList<>();
+		try {
+			HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(file.getInputStream()));
+			//有多少个sheet
+			int sheets = workbook.getNumberOfSheets();
+			for (int i = 0; i < sheets; i++) {
+				HSSFSheet sheet = workbook.getSheetAt(i);
+				//获取多少行
+				int rows = sheet.getPhysicalNumberOfRows();
+				Answer answer = null;
+				//遍历每一行，注意：第 0 行为标题
+				for (int j = 1; j < rows; j++) {
+					answer = new Answer();
+					 //获得第 j 行
+					HSSFRow row = sheet.getRow(j);
+					answer.setSelections(row.getCell(1).getStringCellValue());//单选
+					answer.setCheckes(row.getCell(2).getStringCellValue());//多选
+					answer.setContent(row.getCell(3).getStringCellValue());
+					answers.add(answer);
+				}
+			}
+		
+		} catch (IOException e) {
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
+		}
+		return success(answers);
+	}
+	
 }
