@@ -20,7 +20,7 @@
 
 ## 开发说明
 
-- Springboot 版本2.0.2
+- SpringBoot2.0.2
 - JDK1.8
 - mysql5.5
 
