@@ -13,7 +13,7 @@ public class QuestionVM {
 	private String name;
 	private String questionType;
 	
-	private List<Option> option;
+	private List<Option> options;
 
 	public Long getId() {
 		return id;
@@ -39,12 +39,12 @@ public class QuestionVM {
 		this.questionType = questionType;
 	}
 
-	public List<Option> getOption() {
-		return option;
+	public List<Option> getOptions() {
+		return options;
 	}
 
-	public void setOption(List<Option> option) {
-		this.option = option;
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
-	
+
 }

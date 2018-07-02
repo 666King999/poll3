@@ -48,7 +48,7 @@ public class QuestionServiceImpl implements IQuestionService {
 	@Override
 	public void saveOrUpdateQuestionVM(QuestionVM questionVM) throws Exception {
 		//1. 分离questionVM,从中获取到Question Option
-		List<Option> option = questionVM.getOption();
+		List<Option> option = questionVM.getOptions();
 		Question question = new Question();
 		question.setId(questionVM.getId());
 		question.setName(questionVM.getName());

@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wanglu
  *
  */
-@Api(tags="题库相关的接口-Controller")
+@Api(tags="题库相关接口-Controller")
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
