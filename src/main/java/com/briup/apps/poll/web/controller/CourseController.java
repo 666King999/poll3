@@ -18,9 +18,9 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description="课程相关接口")
 @RestController
 @RequestMapping("/course")
+@Api(tags="课程管理接口-Controller")
 public class CourseController {
 
 	@Autowired

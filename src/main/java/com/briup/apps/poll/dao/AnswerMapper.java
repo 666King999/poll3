@@ -2,11 +2,14 @@ package com.briup.apps.poll.dao;
 
 import com.briup.apps.poll.bean.Answer;
 import com.briup.apps.poll.bean.AnswerExample;
+import com.briup.apps.poll.bean.AnswerExample.Criteria;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface AnswerMapper {
-    long countByExample(AnswerExample example);
+    long countByExample(Criteria criteria);
 
     int deleteByExample(AnswerExample example);
 
@@ -27,4 +30,8 @@ public interface AnswerMapper {
     int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
+
+    @Select("select count(*) from poll_answers where survey_id=#{id}")
+	int countBySurveyId(Long id);
+    
 }

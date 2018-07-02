@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +14,12 @@ import com.briup.apps.poll.bean.extend.ClazzVM;
 import com.briup.apps.poll.service.IClazzService;
 import com.briup.apps.poll.util.MsgResponse;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/Clazz")
+@RequestMapping("/clazz")
+@Api(tags="班级管理接口-Controller")
 public class ClazzController {
 
 	@Autowired
@@ -64,7 +65,7 @@ public class ClazzController {
 	}
 	
 	@ApiOperation("模糊查询")
-	@GetMapping("/query")
+	@GetMapping("query")
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Clazz> list = clazzService.query(keyWord);

@@ -12,8 +12,11 @@ import com.briup.apps.poll.bean.User;
 import com.briup.apps.poll.service.IUserService;
 import com.briup.apps.poll.util.MsgResponse;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/user")
+@Api(tags="用户管理接口-Controller")
 public class UserController {
 	@Autowired
 	private IUserService userService;

@@ -16,9 +16,9 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description="问卷相关接口")
 @RestController
 @RequestMapping("/questionnaire")
+@Api(tags = "问卷管理接口-Controller")
 public class QuestionnaireController {
 
 	//依赖注入
@@ -27,7 +27,7 @@ public class QuestionnaireController {
 	
 	//1，查询所有问卷信息
 	@ApiOperation("查询所有问卷")
-	@GetMapping("/findAllQuestionnaire")
+	@GetMapping("findAllQuestionnaire")
 	public MsgResponse findAllQuestionnaire(){
 		try {
 			List<Questionnaire> list = questionnaireService.findAll();
@@ -41,7 +41,7 @@ public class QuestionnaireController {
 
 	//2，根据id查找问卷信息
 	@ApiOperation("通过id查找问卷信息")
-	@GetMapping("/finById")
+	@GetMapping("finById")
 	public MsgResponse findById(long id) {
 		try {
 			Questionnaire questionnaire = questionnaireService.findById(id);
@@ -54,7 +54,7 @@ public class QuestionnaireController {
 	
 	//3,保存或更新问卷信息
 	@ApiOperation("添加或更新")
-	@PostMapping("/add")
+	@PostMapping("add")
 	public MsgResponse saveOrUpdate(Questionnaire questionnaire) {
 		try {
 			questionnaireService.saveOrUpdate(questionnaire);
@@ -67,7 +67,7 @@ public class QuestionnaireController {
 	
 	//4，根据关键词实现模糊查询问卷信息
 	@ApiOperation("模糊查询")
-	@GetMapping("/query")
+	@GetMapping("query")
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Questionnaire> list = questionnaireService.query(keyWord);
@@ -80,7 +80,7 @@ public class QuestionnaireController {
 	
 	//5，根据id删除问卷信息
 	@ApiOperation("根据id删除问卷信息")
-	@GetMapping("/delete")
+	@GetMapping("delete")
 	public MsgResponse deletById(long id) {
 		try {
 			questionnaireService.deleteById(id);
@@ -93,7 +93,7 @@ public class QuestionnaireController {
 	
 	//6，通过id 对问卷信息进行批量删除
 	@ApiOperation("根据idList 批量删除问卷信息")
-	@GetMapping("/batchDelete")
+	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(String ids) {
 		try {
 			String[] idArray = ids.split("-");

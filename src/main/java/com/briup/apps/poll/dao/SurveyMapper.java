@@ -4,6 +4,8 @@ import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.SurveyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface SurveyMapper {
     long countByExample(SurveyExample example);
@@ -27,4 +29,11 @@ public interface SurveyMapper {
     int updateByPrimaryKeySelective(Survey record);
 
     int updateByPrimaryKey(Survey record);
+    
+    @Update("update poll_survey set status=1 where id=#{id}")
+    int startBySurveyId(Long id);
+    
+    @Update("update poll_survey set status=0 where id=#{id}")
+    int endBySurveyId(Long id);
+    
 }

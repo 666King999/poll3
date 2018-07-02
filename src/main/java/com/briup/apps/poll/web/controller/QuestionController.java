@@ -16,9 +16,9 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description="题目相关接口")
 @RestController
 @RequestMapping("/question")
+@Api(tags="题库管理接口-Controller")
 public class QuestionController {
 
 	//依赖注入
@@ -27,7 +27,7 @@ public class QuestionController {
 	
 	//1，查询所有题目信息
 	@ApiOperation("查询所有题目")
-	@GetMapping("/findAllQuestion")
+	@GetMapping("findAllQuestion")
 	public MsgResponse findAllQuestion(){
 		try {
 			List<Question> list = questionService.findAll();
@@ -41,7 +41,7 @@ public class QuestionController {
 
 	//2，根据id查找题目信息
 	@ApiOperation("通过id查找题目信息")
-	@GetMapping("/finById")
+	@GetMapping("finById")
 	public MsgResponse findById(long id) {
 		try {
 			Question question = questionService.findById(id);
@@ -54,7 +54,7 @@ public class QuestionController {
 	
 	//3,保存或更新题目信息
 	@ApiOperation("添加或更新题目信息")
-	@PostMapping("/add")
+	@PostMapping("add")
 	public MsgResponse saveOrUpdate(Question question) {
 		try {
 			questionService.saveOrUpdate(question);
@@ -67,7 +67,7 @@ public class QuestionController {
 	
 	//4，根据关键词实现模糊查询题目信息
 	@ApiOperation("模糊查询题目信息")
-	@GetMapping("/query")
+	@GetMapping("query")
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Question> list = questionService.query(keyWord);
@@ -80,7 +80,7 @@ public class QuestionController {
 	
 	//5，根据id删除题目信息
 	@ApiOperation("根据id删除题目信息")
-	@GetMapping("/delete")
+	@GetMapping("delete")
 	public MsgResponse deletById(long id) {
 		try {
 			questionService.deleteById(id);
@@ -93,7 +93,7 @@ public class QuestionController {
 	
 	//6，通过id 对题目信息进行批量删除
 	@ApiOperation("根据idList 批量删除题目信息")
-	@GetMapping("/batchDelete")
+	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(String ids) {
 		try {
 			String[] idArray = ids.split("-");

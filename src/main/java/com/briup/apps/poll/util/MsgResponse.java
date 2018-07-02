@@ -13,6 +13,13 @@ public class MsgResponse {
 		response.setData(data);
 		return response;
 	}
+	public static MsgResponse success(Object data){
+		MsgResponse response = new MsgResponse();
+		response.setStauts(200);
+		response.setMessage("OK!");
+		response.setData(data);
+		return response;
+	}
 	
 	public static MsgResponse error(String message){
 		MsgResponse response = new MsgResponse();
