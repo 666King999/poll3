@@ -1,7 +1,5 @@
 package com.briup.apps.poll.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +19,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/survey")
 @Api(tags = "课调管理接口-Controller")
-public class SurveyController {
-	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class SurveyController extends BaseController{
 	
 	@Autowired
 	private ISurveyService surveyService;
@@ -33,32 +29,32 @@ public class SurveyController {
 	@ApiOperation("查看当前所有课调")
 	@GetMapping("findAll")
 	public MsgResponse list() {
-		return MsgResponse.success("成功！", surveyService.findAllWithModel());
+		return success("成功！", surveyService.findAllWithModel());
 	}
 	
 	@ApiOperation("添加课调时拿到所有相关信息")
 	@GetMapping("getAllInfo")
 	public MsgResponse getAllInfo() {
-		return MsgResponse.success(surveyService.findAllInfo());
+		return success(surveyService.findAllInfo());
 	}
 	
 	
 	@ApiOperation("添加课调")
 	@GetMapping("add")
 	public MsgResponse add(Survey survey) {
-		return MsgResponse.success(surveyService.findAllInfo());
+		return success(surveyService.findAllInfo());
 	}
 	
 	@PutMapping("update")
 	@ApiOperation("修改课调")
 	public MsgResponse Update(Survey survey) {
-		return MsgResponse.success("修改 成功！", surveyService.update(survey));
+		return success("修改 成功！", surveyService.update(survey));
 	}
 	
 	@ApiOperation("删除课调")
 	@GetMapping("delete")
 	public MsgResponse delete(Long id) {
-		return MsgResponse.success(surveyService.findAllInfo());
+		return success(surveyService.findAllInfo());
 	}
 	
 	@ApiOperation("批量删除")
@@ -66,10 +62,10 @@ public class SurveyController {
 	@ApiImplicitParam(example="1-5-12")
 	public MsgResponse batchDelete(String ids) {
 		try {
-			return MsgResponse.success("批量删除成功",surveyService.batchDelete(ids));
+			return success("批量删除成功",surveyService.batchDelete(ids));
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	
@@ -77,29 +73,29 @@ public class SurveyController {
 	@ApiOperation("课调审核")
 	public MsgResponse check(Long id) {
 		try {
-			return MsgResponse.success(answerService.findAllBySurveyId(id));
+			return success(answerService.findAllBySurveyId(id));
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	
 	@PostMapping("start")
 	@ApiOperation("开启课调")
 	public MsgResponse start(Long id) {
-		return MsgResponse.success("开启成功", surveyService.start(id));
+		return success("开启成功", surveyService.start(id));
 	}
 	
 	@PostMapping("end")
 	@ApiOperation("结束课调")
 	public MsgResponse end(Long id) {
-		return MsgResponse.success("结束成功", surveyService.end(id));
+		return success("结束成功", surveyService.end(id));
 	}
 	
 	@GetMapping("look")
 	@ApiOperation("查看进度")
 	public MsgResponse look(Long id) {
-		return MsgResponse.success(surveyService.look(id));
+		return success(surveyService.look(id));
 	}
 
 }

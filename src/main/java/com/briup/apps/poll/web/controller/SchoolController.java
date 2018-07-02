@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 @RestController
 @RequestMapping("/school")
 @Api(tags="学校管理接口-Controller")
-public class SchoolController {
+public class SchoolController extends BaseController{
 	@Autowired
 	private ISchoolService schoolService;
 	@GetMapping("findAllSchool")
@@ -25,11 +25,11 @@ public class SchoolController {
 		try {
 			List<School> list = schoolService.findAll();
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("findById")
@@ -37,11 +37,11 @@ public class SchoolController {
 		try {
 			School list = schoolService.findById(id);
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("findByKeywords")
@@ -49,11 +49,11 @@ public class SchoolController {
 		try {
 			List<School> list = schoolService.query(keywords);
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@PostMapping("saveSchool")
@@ -61,11 +61,11 @@ public class SchoolController {
 		try {
 			schoolService.saveOrUpdate(school);
 			//返回成功信息
-			return MsgResponse.success("success", school);
+			return success("success", school);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@PostMapping("updateSchool")
@@ -73,11 +73,11 @@ public class SchoolController {
 		try {
 			schoolService.saveOrUpdate(school);
 			//返回成功信息
-			return MsgResponse.success("success", school);
+			return success("success", school);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("deleteSchoolById")
@@ -85,11 +85,11 @@ public class SchoolController {
 		try {
 			schoolService.deleteById(id);
 			//返回成功信息
-			return MsgResponse.success("success", id);
+			return success("success", id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("batchDeleteSchool")
@@ -97,11 +97,11 @@ public class SchoolController {
 		try {
 			schoolService.batchDelete(ids);
 			//返回成功信息
-			return MsgResponse.success("success", ids);
+			return success("success", ids);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 }

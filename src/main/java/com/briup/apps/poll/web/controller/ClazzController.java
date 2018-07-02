@@ -20,21 +20,20 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/clazz")
 @Api(tags="班级管理接口-Controller")
-public class ClazzController {
+public class ClazzController extends BaseController{
 
 	@Autowired
-	IClazzService clazzService;
+	private IClazzService clazzService;
 	
 	@ApiOperation("查询所有班级")
 	@GetMapping("findAllClazz")
 	public MsgResponse findAllClazz(){
 		try {
 			List<Clazz> list = clazzService.findAll();
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			//TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}	
 
 	}
@@ -44,10 +43,10 @@ public class ClazzController {
 	public MsgResponse findById(long id) {
 		try {
 			Clazz course = clazzService.findById(id);
-			return MsgResponse.success("success",course);
+			return success("success",course);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -56,11 +55,10 @@ public class ClazzController {
 	public MsgResponse saveOrUpdate(Clazz course) {
 		try {
 			clazzService.saveOrUpdate(course);
-			return MsgResponse.success("success", course);
+			return success("success", course);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -69,11 +67,10 @@ public class ClazzController {
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Clazz> list = clazzService.query(keyWord);
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -82,11 +79,10 @@ public class ClazzController {
 	public MsgResponse deletById(long id) {
 		try {
 			clazzService.deleteById(id);
-			return MsgResponse.success("success", "");
+			return success("success", "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -100,11 +96,10 @@ public class ClazzController {
 				idList.add(Long.valueOf(str));
 			}
 			clazzService.batchDelete(idList);
-			return MsgResponse.success("success","");
+			return success("success","");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -113,11 +108,10 @@ public class ClazzController {
 	public MsgResponse selectAllClazz(){
 		try {
 			List<ClazzVM> list = clazzService.selectAll();
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			//TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}	
 
 	}
@@ -127,11 +121,10 @@ public class ClazzController {
 	public MsgResponse selectById(long id){
 		try {
 			ClazzVM clazzVM = clazzService.selectById(id);
-			return MsgResponse.success("success", clazzVM);
+			return success("success", clazzVM);
 		} catch (Exception e) {
-			//TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}	
 
 	}

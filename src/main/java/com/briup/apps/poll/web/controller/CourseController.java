@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/course")
 @Api(tags="课程管理接口-Controller")
-public class CourseController {
+public class CourseController extends BaseController{
 
 	@Autowired
 	private ICourseService courseService;
@@ -31,11 +31,10 @@ public class CourseController {
 	public MsgResponse findAllCourse(){
 		try {
 			List<Course> list = courseService.findAll();
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			//TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}	
 
 	}
@@ -45,10 +44,10 @@ public class CourseController {
 	public MsgResponse findById(long id) {
 		try {
 			Course course = courseService.findById(id);
-			return MsgResponse.success("success",course);
+			return success("success",course);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -57,11 +56,10 @@ public class CourseController {
 	public MsgResponse saveOrUpdate(Course course) {
 		try {
 			courseService.saveOrUpdate(course);
-			return MsgResponse.success("success", course);
+			return success("success", course);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -70,11 +68,10 @@ public class CourseController {
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Course> list = courseService.query(keyWord);
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -83,11 +80,10 @@ public class CourseController {
 	public MsgResponse deletById(long id) {
 		try {
 			courseService.deleteById(id);
-			return MsgResponse.success("success", "");
+			return success("success", "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -101,11 +97,10 @@ public class CourseController {
 				idList.add(Long.valueOf(str));
 			}
 			courseService.batchDelete(idList);
-			return MsgResponse.success("success","");
+			return success("success","");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	

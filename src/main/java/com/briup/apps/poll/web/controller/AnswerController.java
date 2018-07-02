@@ -1,7 +1,5 @@
 package com.briup.apps.poll.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +14,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController 
 @RequestMapping("/answer")
 @Api(tags="答卷相关接口-Controller")
-public class AnswerController {
-
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class AnswerController extends BaseController{
 	
 	@Autowired
 	private IAnswerService answerService;
@@ -26,18 +22,17 @@ public class AnswerController {
 	@GetMapping("list")
 	@ApiOperation("查询全部答卷")
 	public MsgResponse list() {
-		return MsgResponse.success(answerService.findAll());
+		return success(answerService.findAll());
 	}
 	
 	@GetMapping("get")
 	@ApiOperation("根据课调id查询全部答卷")
 	public MsgResponse get(Long id) {
 		try {
-			return MsgResponse.success(answerService.findAllBySurveyId(id));
+			return success(answerService.findAllBySurveyId(id));
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
-	
 }

@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 @RestController
 @RequestMapping("/user")
 @Api(tags="用户管理接口-Controller")
-public class UserController {
+public class UserController extends BaseController{
 	@Autowired
 	private IUserService userService;
 	@GetMapping("findAllUser")
@@ -25,11 +25,11 @@ public class UserController {
 		try {
 			List<User> list = userService.findAll();
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("findById")
@@ -37,11 +37,11 @@ public class UserController {
 		try {
 			User list = userService.findById(id);
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("findByKeywords")
@@ -49,11 +49,11 @@ public class UserController {
 		try {
 			List<User> list = userService.query(keywords);
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@PostMapping("saveUser")
@@ -61,11 +61,11 @@ public class UserController {
 		try {
 			userService.saveOrUpdate(user);
 			//返回成功信息
-			return MsgResponse.success("success", user);
+			return success("success", user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@PostMapping("updateUser")
@@ -73,11 +73,11 @@ public class UserController {
 		try {
 			userService.saveOrUpdate(user);
 			//返回成功信息
-			return MsgResponse.success("success", user);
+			return success("success", user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("deleteUserById")
@@ -85,11 +85,11 @@ public class UserController {
 		try {
 			userService.deleteById(id);
 			//返回成功信息
-			return MsgResponse.success("success", id);
+			return success("success", id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 	@GetMapping("batchDeleteUser")
@@ -97,11 +97,11 @@ public class UserController {
 		try {
 			userService.batchDelete(ids);
 			//返回成功信息
-			return MsgResponse.success("success", ids);
+			return success("success", ids);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			//返回失败信息
-			return MsgResponse.error(e.getMessage());
+			return error(e.getMessage());
 		}
 	}
 }

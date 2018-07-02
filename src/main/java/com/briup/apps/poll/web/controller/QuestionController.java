@@ -23,47 +23,44 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags="题库相关接口-Controller")
 @RestController
 @RequestMapping("/question")
-public class QuestionController {
+public class QuestionController extends BaseController{
 	@Autowired
 	private IQuestionService questionService;
 	
-	@ApiOperation(value="通过ID删除问题",
-			notes="删除题目的同时会把题目下所有的选项也给删除掉")
+	@ApiOperation(value="通过ID删除问题",notes="删除题目的同时会把题目下所有的选项也给删除掉")
 	@GetMapping("deleteQuestionById")
 	public MsgResponse deleteQuestionById(long id){
 		try {
 			questionService.deleteById(id);
-			return MsgResponse.success("删除成功", null);
+			return success("删除成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
-	@ApiOperation(value="批量删除问题",
-			notes="")
+	@ApiOperation("批量删除问题")
 	@PostMapping("batchDeleteQuestion")
 	public MsgResponse batchDeleteQuestion(long[] ids){
 		try {
 			questionService.batchDelete(ids);
-			return MsgResponse.success("删除成功", null);
+			return success("删除成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 		
 	}
 	
-	@ApiOperation(value="保存或修改问题",
-			notes="当id不为空表示修改，否则表示更新，保存和更新的时候需要提交选项数据")
+	@ApiOperation(value="保存或修改问题",notes="当id不为空表示修改，否则表示更新，保存和更新的时候需要提交选项数据")
 	@PostMapping("saveOrUpdateQuestion")
 	public MsgResponse saveOrUpdateQuestion(QuestionVM questionVM){
 		try {
 			questionService.saveOrUpdateQuestionVM(questionVM);
-			return MsgResponse.success("保存成功", null);
+			return success("保存成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 		
 	}
@@ -75,11 +72,11 @@ public class QuestionController {
 		try {
 			List<Question> list = questionService.findAll();
 			// 返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			// 返回失败信息
-			return MsgResponse.error(e.getMessage()) ;
+			return error(e.getMessage()) ;
 		}
 	}
 	
@@ -89,11 +86,11 @@ public class QuestionController {
 		try {
 			List<QuestionVM> list = questionService.findAllQuestionVM();
 			// 返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			// 返回失败信息
-			return MsgResponse.error(e.getMessage()) ;
+			return error(e.getMessage()) ;
 		}
 	}
 }

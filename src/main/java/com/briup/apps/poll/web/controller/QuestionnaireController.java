@@ -23,20 +23,19 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags="问卷相关接口-Controller")
 @RestController
 @RequestMapping("/questionnaire")
-public class QuestionnaireController {
+public class QuestionnaireController extends BaseController{
 	@Autowired
 	private IQuestionnaireService qnService;
 	
-	@ApiOperation(value="批量删除问卷",
-			notes="删除问卷的同时会把问卷和问题的关系解除掉，而问题保留")
+	@ApiOperation(value="批量删除问卷",notes="删除问卷的同时会把问卷和问题的关系解除掉，而问题保留")
 	@PostMapping("batchDeleteQuestion")
 	public MsgResponse batchDeleteQuestion(long[] ids){
 		try {
 			qnService.batchDelete(ids);
-			return MsgResponse.success("批量删除成功", null);
+			return success("批量删除成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 		
 	}
@@ -46,23 +45,22 @@ public class QuestionnaireController {
 	public MsgResponse deleteQuestionnaireById(long id){
 		try {
 			qnService.deleteById(id);
-			return MsgResponse.success("删除成功", null);
+			return success("删除成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
-	@ApiOperation(value="保存或修改问卷信息",
-			notes="如果问卷参数中包含id执行更新操作，否则执行修改操作")
+	@ApiOperation(value="保存或修改问卷信息",notes="如果问卷参数中包含id执行更新操作，否则执行修改操作")
 	@PostMapping("saveOrUpdateQuestionnaire")
 	public MsgResponse saveOrUpdateQuestionnaire(Questionnaire questionnaire,long[] questionIds){
 		try {
 			qnService.saveOrUpdate(questionnaire, questionIds);
-			return MsgResponse.success("保存或修改成功", null);
+			return success("保存或修改成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	
@@ -72,11 +70,11 @@ public class QuestionnaireController {
 		try {
 			QuestionnaireVM qnVM = qnService.findById(id);
 			// 返回成功信息
-			return MsgResponse.success("success", qnVM);
+			return success("success", qnVM);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			// 返回失败信息
-			return MsgResponse.error(e.getMessage()) ;
+			return error(e.getMessage()) ;
 		}
 	}
 	
@@ -86,11 +84,11 @@ public class QuestionnaireController {
 		try {
 			List<Questionnaire> list = qnService.findAll();
 			// 返回成功信息
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			// 返回失败信息
-			return MsgResponse.error(e.getMessage()) ;
+			return error(e.getMessage()) ;
 		}
 	}
 }

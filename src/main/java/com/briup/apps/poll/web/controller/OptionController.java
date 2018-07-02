@@ -21,22 +21,20 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags="选项相关接口-Controller")
 @RestController
 @RequestMapping("/option")
-public class OptionController {
+public class OptionController extends BaseController{
 
 	@Autowired
 	private IOptionService optionService;
 	@ApiOperation("查询所有选项")
 	@GetMapping("findAll")
-	public MsgResponse findAll()
-	{
+	public MsgResponse findAll(){
 		List<Option> list=new ArrayList<>();
 		try {
 			list=optionService.findAll();
-			return MsgResponse.success("操作成功", list);
-		}catch(Exception e)
-		{
+			return success("操作成功", list);
+		}catch(Exception e){
 			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return  error(e.getMessage());
 		}
 	}
 	/**
@@ -46,22 +44,19 @@ public class OptionController {
 	 */
 	@ApiOperation("根据id查询选项")
 	@GetMapping("findById")
-	public MsgResponse findById(@RequestParam(value="id")String id)
-	{  
+	public MsgResponse findById(@RequestParam(value="id")String id){  
 		List<Option> list=new ArrayList<>();
 		String str[]=id.split(",");
 		List<String> ids=new ArrayList<String>();
-		for(int i=0;i<str.length;i++)
-		{
+		for(int i=0;i<str.length;i++){
 			ids.add(str[i]);
 		}
 		try {
 			list=optionService.findById(ids);
-			return MsgResponse.success("操作成功", list);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return success("操作成功", list);
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return  error(e.getMessage());
 		}
 	}
 	
@@ -75,11 +70,10 @@ public class OptionController {
 	public MsgResponse query(String keyWord) {
 		try {
 			List<Option> list = optionService.query(keyWord);
-			return MsgResponse.success("success", list);
+			return success("success", list);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
 	}
 	/**
@@ -88,16 +82,14 @@ public class OptionController {
 	 */
 	@ApiOperation("查询所有选项及其相关信息")
 	@GetMapping("findAllVM")
-	public MsgResponse findAllVM()
-	{
+	public MsgResponse findAllVM(){
 	    List<OptionVM> list=new ArrayList<>();
 	    try {
 			list=optionService.findAllVM();
-			return MsgResponse.success("操作成功", list);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return success("操作成功", list);
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return  error(e.getMessage());
 		}
 	
 	}
@@ -108,22 +100,19 @@ public class OptionController {
 	 */
 	@ApiOperation("根据id查询选项及其相关信息")
 	@GetMapping("findOptionById")
-	public MsgResponse findOptionById(@RequestParam(value="id")String id)
-	{  
+	public MsgResponse findOptionById(@RequestParam(value="id")String id){  
 		List<OptionVM> list=new ArrayList<>();
 		String str[]=id.split(",");
 		List<String> ids=new ArrayList<String>();
-		for(int i=0;i<str.length;i++)
-		{
+		for(int i=0;i<str.length;i++){
 			ids.add(str[i]);
 		}
 		try {
 			list=optionService.findOptionVMById(ids);
-			return MsgResponse.success("操作成功", list);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return success("操作成功", list);
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return  error(e.getMessage());
 		}
 	}
 	/**
@@ -133,21 +122,18 @@ public class OptionController {
 	 */
 	@ApiOperation("根据id删除选项")
 	@GetMapping("deleteById")
-	public MsgResponse deleteById(@RequestParam(value="id")String id)
-	{  
+	public MsgResponse deleteById(@RequestParam(value="id")String id){  
 		String str[]=id.split(",");
 		List<String> ids=new ArrayList<String>();
-		for(int i=0;i<str.length;i++)
-		{
+		for(int i=0;i<str.length;i++){
 			ids.add(str[i]);
 		}
 		try {
 			  optionService.deleteById(ids);
-			return MsgResponse.success("操作成功", ids);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return success("操作成功", ids);
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return  error(e.getMessage());
 		}
 	}
 	/**
@@ -157,15 +143,13 @@ public class OptionController {
 	 */
 	@ApiOperation("更新或插入选项")
 	@PostMapping("insertOrupdate")
-	public  MsgResponse insertOrupdate(Option option)
-	{
+	public  MsgResponse insertOrupdate(Option option){
 		try {
 			optionService.insertOrupdate(option);
-			return MsgResponse.success("操作成功", option);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return  MsgResponse.error(e.getMessage());
+			return success("操作成功", option);
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return error(e.getMessage());
 		}
      }
 }
