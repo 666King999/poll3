@@ -2,7 +2,6 @@ package com.briup.apps.poll.service;
 
 import java.util.List;
 
-import com.briup.apps.poll.bean.Grade;
 import com.briup.apps.poll.bean.Option;
 import com.briup.apps.poll.bean.extend.OptionVM;
 

@@ -26,6 +26,15 @@ public class SurveyVM implements Serializable{
 	
 	private Questionnaire questionnaire;
 
+	
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
 	public Long getId() {
 		return id;
 	}

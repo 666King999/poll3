@@ -4,7 +4,6 @@ import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.SurveyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface SurveyMapper {

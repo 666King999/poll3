@@ -12,7 +12,6 @@ import com.briup.apps.poll.bean.QQExample;
 import com.briup.apps.poll.bean.extend.QuestionnaireVM;
 import com.briup.apps.poll.dao.QQMapper;
 import com.briup.apps.poll.dao.QuestionnaireMapper;
-import com.briup.apps.poll.dao.QQMapper;
 import com.briup.apps.poll.dao.extend.QuestionnaireVMMapper;
 import com.briup.apps.poll.service.IQuestionnaireService;
 /**
