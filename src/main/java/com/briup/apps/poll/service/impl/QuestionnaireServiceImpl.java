@@ -7,64 +7,97 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Questionnaire;
 import com.briup.apps.poll.bean.QuestionnaireExample;
-import com.briup.apps.poll.bean.QuestionnaireExample.Criteria;
+import com.briup.apps.poll.bean.QQ;
+import com.briup.apps.poll.bean.QQExample;
+import com.briup.apps.poll.bean.extend.QuestionnaireVM;
+import com.briup.apps.poll.dao.QQMapper;
 import com.briup.apps.poll.dao.QuestionnaireMapper;
+import com.briup.apps.poll.dao.QQMapper;
+import com.briup.apps.poll.dao.extend.QuestionnaireVMMapper;
 import com.briup.apps.poll.service.IQuestionnaireService;
 /**
- * 问卷service层实现类
+ * 问卷service层编写
  * @author wanglu
  *
  */
 @Service
 public class QuestionnaireServiceImpl implements IQuestionnaireService {
-
-	//依赖注入
 	@Autowired
-	private QuestionnaireMapper questionnaireMapper;
+	private QuestionnaireMapper qnMapper;
+	@Autowired
+	private QuestionnaireVMMapper qnVMMapper;
+	@Autowired
+	private QQMapper qqMapper;
 	
-	//1，查询所有问卷信息
+	
 	@Override
 	public List<Questionnaire> findAll() throws Exception {
-		return questionnaireMapper.selectByExampleWithBLOBs(null);
+		QuestionnaireExample example = new QuestionnaireExample();
+		return qnMapper.selectByExampleWithBLOBs(example);
 	}
 
-	//2，根据id查找问卷信息
 	@Override
-	public Questionnaire findById(long id) throws Exception {
-		return questionnaireMapper.selectByPrimaryKey(id);
+	public QuestionnaireVM findById(long id) throws Exception {
+		return qnVMMapper.selectById(id);
 	}
 
-	//3,保存或更新问卷信息
 	@Override
-	public void saveOrUpdate(Questionnaire questionnaire) throws Exception {
-		if(questionnaire.getId()==null) {
-			questionnaireMapper.insert(questionnaire);
-		}else {
-			questionnaireMapper.updateByPrimaryKey(questionnaire);
+	public void saveOrUpdate(Questionnaire questionnaire,
+			long[] questionIds) throws Exception {
+		//1. 判断是保存操作还是更新
+		if(questionnaire.getId() == null){
+			//1.1 保存
+			//1.1.1 保存问卷信息 {id:null,name:'',description:''}
+			qnMapper.insert(questionnaire);
+			long  questionnaireId = questionnaire.getId();
+			//1.1.2 维护问卷和问题的关系 qq
+			for(long questionId : questionIds){
+				QQ qq = new QQ();
+				qq.setQuestionId(questionId);
+				qq.setQuestionnaireId(questionnaireId);
+				qqMapper.insert(qq);
+			}
+		} else {
+			//1.2 修改
+			//1.2.1 修改问卷信息
+			qnMapper.updateByPrimaryKey(questionnaire);
+			long questionnaireId = questionnaire.getId();
+			//1.2.2 删除问卷下所有的问卷问题关系
+			// delete from poll_qq where questionnaire_id = #{id}
+			QQExample example = new QQExample();
+			example.createCriteria().andQuestionnaireIdEqualTo(questionnaireId);
+			qqMapper.deleteByExample(example);
+			//1.2.3 保存新的问卷问题关系
+			for(long questionId : questionIds){
+				QQ qq = new QQ();
+				qq.setQuestionId(questionId);
+				qq.setQuestionnaireId(questionnaireId);
+				qqMapper.insert(qq);
+			}
 		}
 	}
 
-	//4，根据关键词实现模糊查询问卷信息
-	@Override
-	public List<Questionnaire> query(String keyWord) throws Exception {
-		QuestionnaireExample example = new QuestionnaireExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andNameLike(keyWord);
-		return questionnaireMapper.selectByExampleWithBLOBs(example);
-	}
-	//5，根据id删除问卷信息
 	@Override
 	public void deleteById(long id) throws Exception {
-		questionnaireMapper.deleteByPrimaryKey(id);
+		qnMapper.deleteByPrimaryKey(id);
 	}
-	
-	//6，通过id 对问卷信息进行批量删除
+
 	@Override
-	public void batchDelete(List<Long> ids) throws Exception {
-		for(long id:ids) {
-			questionnaireMapper.deleteByPrimaryKey(id);
+	public void batchDelete(long[] ids) throws Exception {
+		for(long id : ids) {
+			qnMapper.deleteByPrimaryKey(id);
 		}
 	}
 
-
 }
+
+
+
+
+
+
+
+
+
+
+

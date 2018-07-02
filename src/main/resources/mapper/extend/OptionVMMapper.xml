@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.OptionVMMapper">
+  <resultMap id="OptionVMResultMap" type="com.briup.apps.poll.bean.extend.OptionVM">
+  	<id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+ 	<association column="question_id" property="question" select="com.briup.apps.poll.dao.QuestionMapper.selectByPrimaryKey"></association>
+  </resultMap>    
+  
+  <select id="selectAll" resultMap="OptionVMResultMap">
+  	select * from poll_options;
+  </select>
+  
+   <select id="selectById" parameterType="java.lang.Long" resultMap="OptionVMResultMap">
+  	select * from poll_question where id=#{id};
+  </select>
+  </mapper>
