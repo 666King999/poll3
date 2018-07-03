@@ -3,6 +3,7 @@ package com.briup.apps.poll.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class QuestionnaireController extends BaseController{
 	private IQuestionnaireService qnService;
 	
 	@ApiOperation(value="批量删除问卷",notes="删除问卷的同时会把问卷和问题的关系解除掉，而问题保留")
-	@PostMapping("batchDeleteQuestion")
+	@DeleteMapping("batchDeleteQuestion")
 	public MsgResponse batchDeleteQuestion(long[] ids){
 		try {
 			qnService.batchDelete(ids);
@@ -41,7 +42,7 @@ public class QuestionnaireController extends BaseController{
 	}
 	@ApiOperation(value="根据ID删除问卷信息",
 			notes="删除问卷的同时会把问卷和问题的关系解除掉，而问题保留")
-	@GetMapping("deleteQuestionnaireById")
+	@DeleteMapping("deleteQuestionnaireById")
 	public MsgResponse deleteQuestionnaireById(long id){
 		try {
 			qnService.deleteById(id);

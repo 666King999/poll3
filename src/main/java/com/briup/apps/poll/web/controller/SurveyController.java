@@ -1,6 +1,7 @@
 package com.briup.apps.poll.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,7 +41,7 @@ public class SurveyController extends BaseController{
 	
 	
 	@ApiOperation("添加课调")
-	@GetMapping("add")
+	@PostMapping("add")
 	public MsgResponse add(Survey survey) {
 		return success(surveyService.findAllInfo());
 	}
@@ -52,13 +53,13 @@ public class SurveyController extends BaseController{
 	}
 	
 	@ApiOperation("删除课调")
-	@GetMapping("delete")
+	@DeleteMapping("delete")
 	public MsgResponse delete(Long id) {
 		return success(surveyService.findAllInfo());
 	}
 	
 	@ApiOperation("批量删除")
-	@GetMapping("batchDelete")
+	@DeleteMapping("batchDelete")
 	@ApiImplicitParam(example="1-5-12")
 	public MsgResponse batchDelete(String ids) {
 		try {
@@ -80,13 +81,13 @@ public class SurveyController extends BaseController{
 		}
 	}
 	
-	@PostMapping("start")
+	@PutMapping("start")
 	@ApiOperation("开启课调")
 	public MsgResponse start(Long id) {
 		return success("开启成功", surveyService.start(id));
 	}
 	
-	@PostMapping("end")
+	@PutMapping("end")
 	@ApiOperation("结束课调")
 	public MsgResponse end(Long id) {
 		return success("结束成功", surveyService.end(id));

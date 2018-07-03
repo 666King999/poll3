@@ -3,8 +3,10 @@ package com.briup.apps.poll.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,7 +70,7 @@ public class SchoolController extends BaseController{
 			return error(e.getMessage());
 		}
 	}
-	@PostMapping("updateSchool")
+	@PutMapping("updateSchool")
 	public MsgResponse Update(School school) {
 		try {
 			schoolService.saveOrUpdate(school);
@@ -80,7 +82,7 @@ public class SchoolController extends BaseController{
 			return error(e.getMessage());
 		}
 	}
-	@GetMapping("deleteSchoolById")
+	@DeleteMapping("deleteSchoolById")
 	public MsgResponse deleteById(long id) {
 		try {
 			schoolService.deleteById(id);
@@ -92,7 +94,7 @@ public class SchoolController extends BaseController{
 			return error(e.getMessage());
 		}
 	}
-	@GetMapping("batchDeleteSchool")
+	@DeleteMapping("batchDeleteSchool")
 	public MsgResponse batchDelete(Long[] ids) {
 		try {
 			schoolService.batchDelete(ids);

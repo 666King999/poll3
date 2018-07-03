@@ -3,6 +3,7 @@ package com.briup.apps.poll.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class QuestionController extends BaseController{
 	private IQuestionService questionService;
 	
 	@ApiOperation(value="通过ID删除问题",notes="删除题目的同时会把题目下所有的选项也给删除掉")
-	@GetMapping("deleteQuestionById")
+	@DeleteMapping("deleteQuestionById")
 	public MsgResponse deleteQuestionById(long id){
 		try {
 			questionService.deleteById(id);
@@ -40,7 +41,7 @@ public class QuestionController extends BaseController{
 	}
 	
 	@ApiOperation("批量删除问题")
-	@PostMapping("batchDeleteQuestion")
+	@DeleteMapping("batchDeleteQuestion")
 	public MsgResponse batchDeleteQuestion(long[] ids){
 		try {
 			questionService.batchDelete(ids);

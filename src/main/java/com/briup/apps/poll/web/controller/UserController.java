@@ -3,6 +3,7 @@ package com.briup.apps.poll.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +81,7 @@ public class UserController extends BaseController{
 			return error(e.getMessage());
 		}
 	}
-	@GetMapping("deleteUserById")
+	@DeleteMapping("deleteUserById")
 	public MsgResponse deleteById(long id) {
 		try {
 			userService.deleteById(id);
@@ -92,7 +93,7 @@ public class UserController extends BaseController{
 			return error(e.getMessage());
 		}
 	}
-	@GetMapping("batchDeleteUser")
+	@DeleteMapping("batchDeleteUser")
 	public MsgResponse batchDelete(Long[] ids) {
 		try {
 			userService.batchDelete(ids);

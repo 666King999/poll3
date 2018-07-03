@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +75,7 @@ public class CourseController extends BaseController{
 	}
 	
 	@ApiOperation("根据id删除课程信息")
-	@GetMapping("delete")
+	@DeleteMapping("delete")
 	public MsgResponse deletById(long id) {
 		try {
 			courseService.deleteById(id);
@@ -86,7 +87,7 @@ public class CourseController extends BaseController{
 	}
 	
 	@ApiOperation("根据idList 批量删除课程信息")
-	@GetMapping("batchDelete")
+	@DeleteMapping("batchDelete")
 	public MsgResponse batchDelete(String ids) {
 		try {
 			String[] idArray = ids.split("-");
