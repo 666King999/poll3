@@ -1,7 +1,6 @@
 package com.briup.apps.poll.web.controller;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class ExcelController extends BaseController{
 	@GetMapping("download")
 	@ApiOperation("下载课调答卷")
 	public void download() throws IOException{
-
+		
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		//创建一个Excel表单,参数为sheet的名字
 		HSSFSheet sheet = workbook.createSheet("课调答卷表");
@@ -119,6 +118,7 @@ public class ExcelController extends BaseController{
 		}
 		List<Answer> answers = new ArrayList<>();
 		try {
+			@SuppressWarnings("resource")
 			HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(file.getInputStream()));
 			//有多少个sheet
 			int sheets = workbook.getNumberOfSheets();
