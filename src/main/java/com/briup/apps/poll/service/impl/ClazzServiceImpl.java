@@ -49,7 +49,7 @@ public class ClazzServiceImpl implements IClazzService{
 		// TODO Auto-generated method stub
 		ClazzExample example = new ClazzExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andNameLike(keyword);
+		criteria.andNameLike("%"+keyword+"%");
 		List<Clazz> list = clazzMapper.selectByExampleWithBLOBs(example);
 		return list;
 	}
