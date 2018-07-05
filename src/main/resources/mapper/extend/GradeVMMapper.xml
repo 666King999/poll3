@@ -9,10 +9,15 @@
   </resultMap>    
   
   <select id="selectAll" resultMap="GradeVMResultMap">
-  	select * from poll_Grade;
+  	select * from poll_grade;
   </select>
   
    <select id="selectById" parameterType="java.lang.Long" resultMap="GradeVMResultMap">
-  	select * from poll_School where id=#{id};
+  	select * from poll_school where id=#{id};
   </select>
+   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="GradeVMResultMap">
+  	select * from poll_grade where id=#{id};
+  </select>
+  
+   
 </mapper>
