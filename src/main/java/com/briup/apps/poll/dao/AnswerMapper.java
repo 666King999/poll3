@@ -33,5 +33,8 @@ public interface AnswerMapper {
 
     @Select("select count(*) from poll_answers where survey_id=#{id}")
 	int countBySurveyId(Long id);
+
+    @Select("select * from poll_answers where survey_id=#{id}")
+	List<Answer> selectBySurveyId(Long id);
     
 }

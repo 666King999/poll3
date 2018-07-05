@@ -94,7 +94,7 @@ public class SurveyController extends BaseController{
 	}
 	
 	@GetMapping("look")
-	@ApiOperation("查看进度")
+	@ApiOperation("课调分析")
 	public MsgResponse look(Long id) {
 		return success(surveyService.look(id));
 	}

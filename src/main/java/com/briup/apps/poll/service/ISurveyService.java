@@ -61,6 +61,6 @@ public interface ISurveyService {
 	 * @param id
 	 * @return
 	 */
-	int look(Long id);
+	double look(Long id);
 	
 }

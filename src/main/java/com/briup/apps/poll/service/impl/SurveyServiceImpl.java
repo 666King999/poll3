@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.briup.apps.poll.bean.Answer;
 import com.briup.apps.poll.bean.Clazz;
 import com.briup.apps.poll.bean.Course;
 import com.briup.apps.poll.bean.Grade;
@@ -106,11 +108,28 @@ public class SurveyServiceImpl implements ISurveyService{
 	}
 
 	@Override
-	public int look(Long id) {
-		int answers = answerMapper.countBySurveyId(id);
-		//Survey survey = surveyMapper.selectByPrimaryKey(id);
-		//Clazz clazz = clazzMapper.selectByPrimaryKey(survey.getClazzId());
-		return answers;
+	public double look(Long id) {
+		Survey survey = surveyMapper.selectByPrimaryKey(id);
+		List<Answer> answers = answerMapper.selectBySurveyId(survey.getId());
+		int sum = 0;
+		for (Answer answer : answers) {
+			String[] selectStr = answer.getSelections().split("|");
+			String[] checkStr = answer.getSelections().split("|");
+			for (String string : checkStr) {
+				if (string.equals("|")) {
+					continue;
+				}
+				sum+=Integer.parseInt(string);
+			}
+			for (String string : selectStr) {
+				if (string.equals("|")) {
+					continue;
+				}
+				sum+=Integer.parseInt(string);
+			}
+		}
+		
+		return sum/answers.size();
 	}
 	
 }
