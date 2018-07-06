@@ -29,7 +29,6 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	MsgResponse handleException(Exception e, HttpServletRequest request) throws Exception{
 		log.info("请求地址：" + request.getRequestURL());
-        //log.error("异常信息：",e);
         log.error("异常信息："+e.getMessage(),e);
         return MsgResponse.error(e.getMessage());
 	}

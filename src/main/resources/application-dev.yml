@@ -1,9 +1,9 @@
 server: 
-    port: 9090
+    port: 8080
 spring: 
     datasource: 
         name: poll
-        url: jdbc:mysql://139.199.64.253:3306/poll2.0?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        url: jdbc:mysql://localhost:3306/poll2.0?useUnicode=true&characterEncoding=UTF-8&useSSL=false
         username: root
         password: 123456  
 
